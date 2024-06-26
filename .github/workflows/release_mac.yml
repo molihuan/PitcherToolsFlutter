@@ -1,0 +1,33 @@
+name: Release Mac
+on:
+  # 手动触发
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build
+    runs-on: macos-14
+    steps:
+      # 使用本项目
+      - uses: actions/checkout@v4
+
+      #设置flutter
+      - uses: subosito/flutter-action@v2.12.0
+        with:
+          # The Flutter version to make available on the path
+          flutter-version: 3.19.3
+          # The Flutter build release channel
+          channel: # optional, default is stable
+
+      # Get flutter dependencies.
+      - run: flutter pub get
+
+      - name: Build for macOS
+        if: matrix.platform == 'macos'
+        run: flutter build macos --release
+
+      - name: Upload Artifact for macOS
+        if: matrix.platform == 'macos'
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-app
+          path: build/macos/Build/Products/Release/*.app

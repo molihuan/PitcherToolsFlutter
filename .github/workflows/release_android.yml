@@ -1,0 +1,55 @@
+name: Release Android Apk
+on:
+  # 手动触发
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+      # 使用本项目
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 设置jdk
+      - name: Set up JDK
+        uses: actions/setup-java@v3.13.0
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      # 设置flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2.12.0
+        with:
+          flutter-version: 3.19.3
+          channel: # optional, default is stable
+
+      # 获取flutter依赖
+      - name: Get Flutter dependencies
+        run: flutter pub get
+
+      # 构建apk
+      - name: Build APK
+        run: flutter build apk --split-per-abi
+
+      - name: Upload Artifact x86_64-release.apk
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-x86_64-release
+          path: build/app/outputs/flutter-apk/app-x86_64-release.apk
+
+      - name: Upload Artifact armeabi-v7a-release.apk
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-armeabi-v7a-release
+          path: build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+
+      - name: Upload Artifact arm64-v8a-release.apk
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-arm64-v8a-release
+          path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+
+
+
