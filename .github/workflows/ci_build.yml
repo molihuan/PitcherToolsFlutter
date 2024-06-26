@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  FLUTTER_VERSION: '3.19.3'
+  FLUTTER_VERSION: '3.19.6'
 
 jobs:
   setup:
