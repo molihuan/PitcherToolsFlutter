@@ -1,0 +1,42 @@
+name: pitchertools
+description: "jh pitcher tools."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+
+  #网络请求
+  dio: ^5.4.3+1
+  #ui库
+  getwidget: 4.0.0
+  #ui
+  velocity_x: ^4.1.2
+  #路由组件
+  #https://github.com/jonataslaw/getx/blob/master/README.zh-cn.md
+  get: ^4.6.6
+  #工具类 包含shared_preferences
+  #https://github.com/bhoominn/nb_utils
+  nb_utils: ^7.0.2
+  #https://github.com/Sky24n/common_utils
+  common_utils: ^2.1.0
+  #吐司弹窗框架
+  #https://pub-web.flutter-io.cn/packages/flutter_smart_dialog
+  flutter_smart_dialog: ^4.9.5+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/ml.png
+
